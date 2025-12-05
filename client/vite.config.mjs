@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// target server port (the Express server uses 4000 by default)
 const { PORT = 4000 } = process.env
 
 export default defineConfig({
   plugins: [react()],
-  base: '/RocketOdds/',
+  base: '/',  // served at root by Express
   server: {
     proxy: {
       '/api': {
@@ -20,9 +19,7 @@ export default defineConfig({
     },
   },
   build: {
-    manifest: true,
-    rollupOptions: {
-      input: './src/main.jsx',
-    },
+    emptyOutDir: true,
+    outDir: '../dist',
   },
 })
